@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Surat Pernyataan Pendaftaran TKA – Web Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>.toast{animation:fade 3s ease forwards}@keyframes fade{0%{opacity:0;transform:translateY(6px)}10%,90%{opacity:1;transform:translateY(0)}100%{opacity:0}}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <h1 class="text-sm font-semibold">Form TKA – Surat Pernyataan</h1>
+      <div class="text-xs text-slate-500">Mobile‑first</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl p-4 sm:p-6 lg:p-8">
+    <form id="tkaForm" class="bg-white shadow-sm rounded-2xl border border-slate-200 p-4 sm:p-6">
+      <div class="text-center mb-4">
+        <p class="font-extrabold tracking-tight text-base sm:text-lg">SURAT PERNYATAAN PENDAFTARAN TES KEMAMPUAN AKADEMIK (TKA)</p>
+        <p class="text-xs mt-2 text-slate-600">Berdasarkan Peraturan Menteri Pendidikan Dasar dan Menengah No. 9 Tahun 2025 tentang Tes Kemampuan Akademik.</p>
+      </div>
+
+      <!-- IDENTITAS (hanya teks, 2 kolom) -->
+      <section id="identitasWrap" class="space-y-4 opacity-40 pointer-events-none">
+        <h2 class="font-semibold text-sm">A. Identitas Peserta</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+          <div>
+            <p class="font-medium">Nama Lengkap:</p>
+            <p id="outNama" class="ml-2"></p>
+          </div>
+          <div>
+            <p class="font-medium">Tempat/Tanggal Lahir:</p>
+            <p id="outTTL" class="ml-2"></p>
+          </div>
+          <div>
+            <p class="font-medium">NISN:</p>
+            <p id="outNisn" class="ml-2"></p>
+          </div>
+          <div>
+            <p class="font-medium">Jurusan/Program Studi:</p>
+            <p id="outJurusan" class="ml-2"></p>
+          </div>
+          <div>
+            <p class="font-medium">Satuan Pendidikan:</p>
+            <p class="ml-2">SMK NEGERI 7 KENDAL</p>
+          </div>
+          <div>
+            <p class="font-medium">NPSN:</p>
+            <p class="ml-2">69772961</p>
+          </div>
+          <div>
+            <p class="font-medium">Provinsi:</p>
+            <p class="ml-2">JAWA TENGAH</p>
+          </div>
+          <div>
+            <p class="font-medium">Kabupaten/Kota:</p>
+            <p class="ml-2">KAB. KENDAL</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="my-5">
+
+      <!-- KEIKUTSERTAAN -->
+      <section id="ikutWrap" class="space-y-3 opacity-40 pointer-events-none">
+        <h2 class="font-semibold text-sm">B. Keikutsertaan TKA</h2>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <label class="inline-flex items-center gap-2"><input type="radio" name="ikut" value="Mengikuti" required class="rounded"/> <span class="text-sm">Mengikuti</span></label>
+          <label class="inline-flex items-center gap-2"><input type="radio" name="ikut" value="Tidak Mengikuti" class="rounded"/> <span class="text-sm">Tidak Mengikuti</span></label>
+        </div>
+      </section>
+
+      <hr class="my-5">
+
+      <!-- MATA UJI -->
+      <section id="mapelWrap" class="space-y-4 opacity-40 pointer-events-none">
+        <h2 class="font-semibold text-sm">C. Mata Uji</h2>
+        <div class="rounded-xl border border-slate-200">
+          <div class="px-4 py-3 bg-slate-50 rounded-t-xl text-sm font-semibold">1. Mata Uji Wajib untuk kelas 12 SMK/MAK</div>
+          <ul class="px-4 py-3 text-sm space-y-1">
+            <li>• Bahasa Indonesia</li>
+            <li>• Matematika</li>
+            <li>• Bahasa Inggris</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-slate-200">
+          <div class="px-4 py-3 bg-slate-50 rounded-t-xl text-sm font-semibold flex items-center justify-between">
+            <span>2. Mata Pelajaran Pilihan (wajib memilih <strong>2</strong>)</span>
+            <span id="counter" class="text-xs text-slate-500">Dipilih: 0/2</span>
+          </div>
+          <div class="p-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm" id="mapelGrid"></div>
+        </div>
+      </section>
+
+      <hr class="my-5">
+
+      <!-- PERNYATAAN -->
+      <section id="pernyataanWrap" class="space-y-3 opacity-40 pointer-events-none">
+        <h2 class="font-semibold text-sm">D. Pernyataan</h2>
+        <p class="text-sm leading-relaxed">Dengan ini saya menyatakan akan mengikuti Tes Kemampuan Akademik yang diselenggarakan oleh Kemendikdasmen dengan jujur dan penuh integritas, serta bersedia mematuhi seluruh ketentuan yang berlaku.</p>
+        <label class="inline-flex items-start gap-2"><input id="agree" type="checkbox" required class="mt-1 rounded"> <span class="text-sm">Saya menyatakan data yang saya isi adalah benar dan dapat dipertanggungjawabkan.</span></label>
+      </section>
+
+      <div class="mt-6 flex justify-end">
+        <button type="button" id="btnSave" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm" disabled>Simpan</button>
+      </div>
+    </form>
+
+    <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 hidden"></div>
+
+    <!-- POPUP VERIFIKASI -->
+    <div id="gate" class="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-20">
+      <div class="bg-white w-full max-w-md rounded-2xl p-5 shadow-xl">
+        <h3 class="text-sm font-semibold">Verifikasi Peserta</h3>
+        <p class="text-xs text-slate-500 mt-1">Pilih nama siswa dan isi tanggal lahir.</p>
+        <form id="gateForm" class="mt-4 space-y-3">
+          <label class="block"><span class="text-xs">Nama Siswa</span>
+            <select id="selNama" class="mt-1 w-full rounded-xl border-slate-300 text-sm"></select>
+          </label>
+          <label class="block"><span class="text-xs">Tanggal Lahir</span>
+            <input type="date" id="selTgl" class="mt-1 w-full rounded-xl border-slate-300 text-sm" required />
+          </label>
+          <div class="flex justify-end pt-2"><button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-sm">Lanjut</button></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+<script>
+// DB Dummy
+const DB=[
+ {id:'S001',nama:'VINA RIZQIANA',tgl:'2008-10-26',ttl:'KENDAL, 26 Oktober 2008',nisn:'0082125101',jurusan:'Teknik Komputer dan Jaringan'},
+ {id:'S002',nama:'RAMA PRATAMA',tgl:'2008-02-14',ttl:'KENDAL, 14 Februari 2008',nisn:'0081112233',jurusan:'Teknik Otomotif'},
+ {id:'S003',nama:'SITI NURHALIZA',tgl:'2008-05-09',ttl:'KENDAL, 9 Mei 2008',nisn:'0089990001',jurusan:'Akuntansi'}
+];
+
+// Mapel
+const subjects=[[1,'Matematika Tingkat Lanjut'],[2,'Bahasa Indonesia Tingkat Lanjut'],[3,'Bahasa Inggris Tingkat Lanjut'],[4,'Fisika'],[5,'Kimia'],[6,'Biologi'],[7,'Ekonomi'],[8,'Sosiologi'],[9,'Geografi'],[10,'Sejarah'],[11,'Antropologi'],[12,'PPKn/Pendidikan Pancasila'],[13,'Bahasa Arab'],[14,'Bahasa Jerman'],[15,'Bahasa Perancis'],[16,'Bahasa Jepang'],[17,'Bahasa Korea'],[18,'Bahasa Mandarin'],[19,'Produk/Projek Kreatif dan Kewirausahaan']];
+const grid=document.getElementById('mapelGrid');
+subjects.forEach(([no,label])=>{const row=document.createElement('label');row.className='flex items-center gap-3 border rounded-xl p-2 hover:bg-slate-50';row.innerHTML=`<input type="checkbox" name="mapel_pilihan" value="${no}-${label}" class="rounded mapel"/><span class="inline-flex items-center justify-center w-6 h-6 text-xs font-semibold rounded bg-slate-100">${no}</span><span class="text-sm">${label}</span>`;grid.appendChild(row);});
+
+const counter=document.getElementById('counter');const limit=2;
+function updateCounter(){const checked=[...document.querySelectorAll('.mapel:checked')];counter.textContent=`Dipilih: ${checked.length}/${limit}`;const unchecked=[...document.querySelectorAll('.mapel:not(:checked)')];const disable=checked.length>=limit;unchecked.forEach(cb=>{cb.disabled=disable;cb.parentElement.classList.toggle('opacity-50',disable)});document.getElementById('btnSave').disabled=checked.length!==limit||!document.getElementById('agree').checked;}
+document.addEventListener('change',e=>{if(e.target.classList.contains('mapel'))updateCounter();if(e.target.id==='agree')updateCounter();});
+
+// Gate
+const sel=document.getElementById('selNama');DB.forEach(s=>{const opt=document.createElement('option');opt.value=s.id;opt.textContent=s.nama;sel.appendChild(opt)});
+
+function fillIdentitas(data){document.getElementById('outNama').textContent=data.nama;document.getElementById('outTTL').textContent=data.ttl;document.getElementById('outNisn').textContent=data.nisn;document.getElementById('outJurusan').textContent=data.jurusan;}
+
+function unlock(){['identitasWrap','ikutWrap','mapelWrap','pernyataanWrap'].forEach(id=>{document.getElementById(id).classList.remove('opacity-40','pointer-events-none')});}
+
+// Gate verify
+const gateForm=document.getElementById('gateForm');gateForm.addEventListener('submit',e=>{e.preventDefault();const id=sel.value;const tgl=document.getElementById('selTgl').value;const siswa=DB.find(s=>s.id===id);if(siswa&&siswa.tgl===tgl){fillIdentitas(siswa);unlock();document.getElementById('gate').classList.add('hidden');toast('Verifikasi berhasil');document.querySelector('input[name="ikut"][value="Mengikuti"]').checked=true;}else{alert('Nama & tanggal lahir tidak cocok')}});
+
+function toast(msg){const t=document.getElementById('toast');t.className='fixed bottom-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-sm px-4 py-2 rounded-xl shadow toast';t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),3000);}
+
+// Save
+function getFormData(){const data={};data.nama=document.getElementById('outNama').textContent;data.nisn=document.getElementById('outNisn').textContent;data.jurusan=document.getElementById('outJurusan').textContent;data.mapel_pilihan=[...document.querySelectorAll('.mapel:checked')].map(cb=>cb.value);return data;}
+
+document.getElementById('btnSave').addEventListener('click',()=>{const selected=[...document.querySelectorAll('.mapel:checked')];if(selected.length!==limit){alert('Harap pilih 2 mapel');return;}if(!document.getElementById('agree').checked){alert('Harap centang pernyataan');return;}const data=getFormData();const key='tka_submissions';const list=JSON.parse(localStorage.getItem(key)||'[]');const idx=list.findIndex(x=>x.nisn===data.nisn);if(idx>-1){list[idx]=data}else{list.push(data)}localStorage.setItem(key,JSON.stringify(list));toast('Data tersimpan di perangkat ini')});
+
+updateCounter();
+</script>
+</body>
+</html>
